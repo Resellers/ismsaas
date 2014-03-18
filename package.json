@@ -1,0 +1,31 @@
+{
+  "name": "ismsaas",
+  "version": "0.0.1",
+  "description": "Isms as a service",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "cake dev",
+    "test": "mocha --compilers coffee:coffee-script/register --require coffee-script --require test/test_helper.coffee --growl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Resellers/ismsaas.git"
+  },
+  "keywords": [
+    "isms",
+    "service",
+    "api"
+  ],
+  "author": "Roy van de Water",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Resellers/ismsaas/issues"
+  },
+  "homepage": "https://github.com/Resellers/ismsaas",
+  "dependencies": {
+    "watch": "~0.9.0",
+    "underscore": "~1.6.0",
+    "coffee-script": "~1.7.1",
+    "express": "~3.4.8"
+  }
+}
