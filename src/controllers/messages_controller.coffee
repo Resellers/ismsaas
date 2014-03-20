@@ -1,5 +1,5 @@
-class IsmsController
+class MessagesController
   @index: (request, response) ->
     response.send 'hello world'
 
-module.exports = IsmsController
+module.exports = MessagesController

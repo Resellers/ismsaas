@@ -2,7 +2,7 @@ express  = require 'express'
 http     = require 'http'
 path     = require 'path'
 
-isms_controller = require './controllers/isms_controller'
+messages_controller = require './controllers/messages_controller'
 
 app = express()
 
@@ -16,11 +16,12 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use express.static path.join(__dirname, '../public')
+app.use express.static path.join(__dirname, 'client')
 
 # development only
 app.use express.errorHandler() if 'development' == app.get('env')
 
-app.get '/api/v1/isms', isms_controller.index
+app.get '/api/v1/messages', messages_controller.index
 
 http.createServer(app).listen app.get('port'), ->
   console.log "Express server listening on port #{app.get 'port'}"
