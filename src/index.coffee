@@ -15,12 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use express.static path.join(__dirname, 'public')
+app.use express.static path.join(__dirname, '../public')
 
 # development only
 app.use express.errorHandler() if 'development' == app.get('env')
 
-app.get '/', isms_controller.index
+app.get '/api/v1/isms', isms_controller.index
 
 http.createServer(app).listen app.get('port'), ->
   console.log "Express server listening on port #{app.get 'port'}"
