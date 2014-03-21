@@ -1,5 +1,9 @@
+Messages = require '../collections/messages'
+
 class MessagesController
   @index: (request, response) ->
-    response.send 'hello world'
+    messages = new Messages
+    messages.fetch =>
+      response.send messages.toJSON()
 
 module.exports = MessagesController
