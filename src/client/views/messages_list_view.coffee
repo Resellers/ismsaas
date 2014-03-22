@@ -1,8 +1,8 @@
 define [
   'backbone'
-  'views/message_row_view'
+  'views/quote_row_view'
   'templates/quotes_list'
-  ], (Backbone, MessageRowView) ->
+  ], (Backbone, QuoteRowView) ->
   class MessagesListView extends Backbone.View
     template: JST['quotes_list']
 
@@ -23,7 +23,7 @@ define [
 
     # Instance Methods
     add_one: (model) =>
-      view = new MessageRowView model: model
+      view = new QuoteRowView model: model
       @$('.list-group').append view.render()
       @views.push view
 

@@ -1,5 +1,5 @@
 define ['backbone', 'templates/quote_row'], (Backbone) ->
-  class MessageRowView extends Backbone.View
+  class QuoteRowView extends Backbone.View
     template: JST['quote_row']
     className: 'list-group-item'
 
