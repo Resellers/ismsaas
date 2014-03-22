@@ -1,5 +1,8 @@
 class window.Path
-  @new_quote: => 'quotes/new'
-  @new_ism:   => 'isms/new'
+  @quotes:    => '/quotes'
+  @new_quote: => '/quotes/new'
+
+  @isms:      => '/'
+  @new_ism:   => '/isms/new'
 
 

@@ -2,6 +2,9 @@ define ['backbone', 'templates/ism_form'], (Backbone) ->
   class IsmFormView extends Backbone.View
     template: JST['ism_form']
 
+    initialize: =>
+      @listenTo @model, 'sync', => Backbone.history.navigate Path.isms(), true
+
     context: =>
       cid: @cid
 

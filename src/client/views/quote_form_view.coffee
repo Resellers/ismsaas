@@ -2,6 +2,9 @@ define ['backbone', 'templates/quote_form'], (Backbone) ->
   class QuoteFormView extends Backbone.View
     template: JST['quote_form']
 
+    initialize: =>
+      @listenTo @model, 'sync', => Backbone.history.navigate Path.quotes(), true
+
     context: =>
       cid: @cid
 
