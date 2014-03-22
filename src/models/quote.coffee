@@ -1,12 +1,13 @@
 Backbone = require 'backbone'
 {MongoClient} = require 'mongodb'
 
-class Message extends Backbone.Model
-  save: (attributes={}) =>
+class Quote extends Backbone.Model
+  save: (attributes={}, success:cb) =>
     @set attributes
     MongoClient.connect 'mongodb://127.0.0.1:27017/ismsaas', (err, db) =>
-      db.collection('messages').insert @toJSON(), =>
+      db.collection('quotes').insert @toJSON(), =>
         @trigger 'sync'
         db.close()
+        cb()
 
-module.exports = Message
+module.exports = Quote

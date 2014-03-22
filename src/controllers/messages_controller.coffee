@@ -1,14 +1,14 @@
-Message  = require '../models/message'
-Messages = require '../collections/messages'
+Quote  = require '../models/quote'
+Quotes = require '../collections/quotes'
 
 class MessagesController
   @index: (request, response) ->
-    messages = new Messages
+    messages = new Quotes
     messages.fetch =>
       response.send messages.toJSON()
 
   @create: (request, response) ->
-    message = new Message request.body
+    message = new Quote request.body
     message.save {}, success: ->
       response.send message.toJSON(), 201
 
