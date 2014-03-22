@@ -1,9 +1,9 @@
 define [
   'models/quote'
-  'collections/messages'
+  'collections/quotes'
   'views/messages_list_view'
   'views/message_form_view'
-  ], (Quote, Messages, MessagesListView, MessageFormView) ->
+  ], (Quote, Quotes, MessagesListView, MessageFormView) ->
 
   class MessagesRouter extends Backbone.Router
     routes:
@@ -11,7 +11,7 @@ define [
       'messages/new' : 'new'
 
     index: =>
-      collection = new Messages
+      collection = new Quotes
       collection.fetch()
       view = new MessagesListView collection: collection
       $('#main-content').html view.render()

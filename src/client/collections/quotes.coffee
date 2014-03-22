@@ -1,4 +1,4 @@
 define ['backbone', 'models/quote'], (Backbone, Quote) ->
-  class Messages extends Backbone.Collection
+  class Quotes extends Backbone.Collection
     model: Quote
-    url: '/api/v1/messages'
+    url: '/api/v1/quotes'
