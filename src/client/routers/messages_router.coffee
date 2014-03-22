@@ -2,8 +2,8 @@ define [
   'models/quote'
   'collections/quotes'
   'views/quotes_list_view'
-  'views/message_form_view'
-  ], (Quote, Quotes, QuotesListView, MessageFormView) ->
+  'views/quote_form_view'
+  ], (Quote, Quotes, QuotesListView, QuoteFormView) ->
 
   class MessagesRouter extends Backbone.Router
     routes:
@@ -18,7 +18,7 @@ define [
 
     new: =>
       model = new Quote
-      view  = new MessageFormView model: model
+      view  = new QuoteFormView model: model
       $('#main-content').html view.render()
 
   new MessagesRouter
