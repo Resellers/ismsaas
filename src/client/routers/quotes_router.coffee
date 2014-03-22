@@ -6,8 +6,13 @@ define [
   ], (Quote, Quotes, QuotesListView, QuoteFormView) ->
 
   class QuotesRouter extends Backbone.Router
+    initialize: =>
+      @on 'route', =>
+        $('.navbar-nav li').removeClass 'active'
+        $('.navbar-nav li.nav-quotes').addClass 'active'
+
     routes:
-      ''           : 'index'
+      'quotes'     : 'index'
       'quotes/new' : 'new'
 
     index: =>

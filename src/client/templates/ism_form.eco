@@ -1,0 +1,19 @@
+<h1>New Ism</h1>
+
+<br />
+<br />
+<br />
+
+<div class="row">
+  <div class="col-sm-12">
+
+    <form role="form">
+      <div class="form-group">
+        <label for="inputName<%= @cid %>">Name</label>
+        <input type="text" class="form-control name" id="inputName<%= @cid %>">
+      </div>
+
+      <button class="btn btn-default">Submit</button>
+    </form>
+  </div>
+</div>

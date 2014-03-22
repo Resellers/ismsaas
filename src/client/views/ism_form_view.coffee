@@ -1,6 +1,6 @@
-define ['backbone', 'templates/quote_form'], (Backbone) ->
-  class QuoteFormView extends Backbone.View
-    template: JST['quote_form']
+define ['backbone', 'templates/ism_form'], (Backbone) ->
+  class IsmFormView extends Backbone.View
+    template: JST['ism_form']
 
     context: =>
       cid: @cid
@@ -18,4 +18,4 @@ define ['backbone', 'templates/quote_form'], (Backbone) ->
 
     update_model: =>
       @model.set
-        text: @$('input.text').val()
+        name: @$('input.name').val()
