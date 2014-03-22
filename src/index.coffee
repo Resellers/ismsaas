@@ -2,7 +2,7 @@ express  = require 'express'
 http     = require 'http'
 path     = require 'path'
 
-messages_controller = require './controllers/messages_controller'
+quotes_controller = require './controllers/quotes_controller'
 
 app = express()
 
@@ -21,8 +21,8 @@ app.use express.static path.join(__dirname, 'client')
 # development only
 app.use express.errorHandler() if 'development' == app.get('env')
 
-app.get  '/api/v1/quotes', messages_controller.index
-app.post '/api/v1/quotes', messages_controller.create
+app.get  '/api/v1/quotes', quotes_controller.index
+app.post '/api/v1/quotes', quotes_controller.create
 app.use (req, res) ->
   return res.send 404 unless req.method == 'GET'
   res.sendfile path.join(__dirname, '../public/index.html')
