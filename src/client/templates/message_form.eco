@@ -3,19 +3,17 @@
 <br />
 <br />
 <br />
-<br />
 
-<form class="form-horizontal" role="form">
-  <div class="form-group">
-    <label for="inputText<%= @cid %>" class="col-sm-2 control-label">Text</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputText<%= @cid %>">
-    </div>
-  </div>
+<div class="row">
+  <div class="col-sm-12">
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button class="btn btn-default">Submit  </button>
-    </div>
+    <form role="form">
+      <div class="form-group">
+        <label for="inputText<%= @cid %>">Text</label>
+        <input type="text" class="form-control text" id="inputText<%= @cid %>">
+      </div>
+
+      <button class="btn btn-default">Submit</button>
+    </form>
   </div>
-</form>
+</div>

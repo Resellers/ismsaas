@@ -1,13 +1,14 @@
 {spawn}     = require 'child_process'
 {watchTree} = require 'watch'
 _           = require 'underscore'
+moment      = require 'moment'
 
 
 runTests = _.throttle (=> spawn 'npm', ['test'], stdio: 'inherit'), 100, trailing: false
 compileTemplate = (file) =>
   return unless _.isString file
-  console.log "compiled template: #{file}"
   spawn 'eco', ['--output', 'lib/client/templates', '--identifier', 'JST', file]
+  console.log "#{moment().format 'hh:mm:ss'} - compiled template: #{file}"
 
 
 task 'dev', 'rebuild the project', (options) ->
