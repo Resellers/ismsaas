@@ -3,7 +3,7 @@ define [
   'views/quote_row_view'
   'templates/quotes_list'
   ], (Backbone, QuoteRowView) ->
-  class MessagesListView extends Backbone.View
+  class QuotesListView extends Backbone.View
     template: JST['quotes_list']
 
     initialize: =>
