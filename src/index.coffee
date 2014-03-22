@@ -22,6 +22,8 @@ app.use express.static path.join(__dirname, 'client')
 app.use express.errorHandler() if 'development' == app.get('env')
 
 app.get '/api/v1/messages', messages_controller.index
+app.use (req, res) ->
+  res.sendfile path.join(__dirname, '../public/index.html')
 
 http.createServer(app).listen app.get('port'), ->
   console.log "Express server listening on port #{app.get 'port'}"

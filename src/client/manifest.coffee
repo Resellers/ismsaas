@@ -5,5 +5,12 @@ requirejs.config
     bootstrap:
       exports: 'Bootstrap'
 
-require ['backbone', 'routers/messages_router'], (Backbone) =>
-  Backbone.history.start()
+require ['backbone', 'path', 'routers/messages_router'], (Backbone) =>
+  Backbone.history.start pushState: true
+  $(document).on 'click', 'a:not([data-bypass])', (evt) ->
+    href = $(this).attr 'href'
+    protocol = "#{@protocol}//"
+
+    if href.slice(protocol.length) != protocol
+      evt.preventDefault()
+      Backbone.history.navigate href, true

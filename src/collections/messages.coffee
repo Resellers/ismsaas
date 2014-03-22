@@ -1,7 +1,8 @@
 {MongoClient} = require 'mongodb'
 
 class Messages
-  add: =>
+  add: (results) =>
+    console.log results
 
   fetch: (cb=->) =>
     MongoClient.connect 'mongodb://127.0.0.1:27017/ismsaas', (err, db) =>

@@ -1,1 +1,7 @@
-<h1>Hello World</h1>
+<h1>Messages List
+  <small>
+    <a href="<%= Path.new_message() %>">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
+  </small>
+</h1>
