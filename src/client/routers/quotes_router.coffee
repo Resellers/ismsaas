@@ -5,10 +5,10 @@ define [
   'views/quote_form_view'
   ], (Quote, Quotes, QuotesListView, QuoteFormView) ->
 
-  class MessagesRouter extends Backbone.Router
+  class QuotesRouter extends Backbone.Router
     routes:
-      ''             : 'index'
-      'messages/new' : 'new'
+      ''           : 'index'
+      'quotes/new' : 'new'
 
     index: =>
       collection = new Quotes
@@ -21,4 +21,4 @@ define [
       view  = new QuoteFormView model: model
       $('#main-content').html view.render()
 
-  new MessagesRouter
+  new QuotesRouter

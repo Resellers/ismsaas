@@ -5,7 +5,7 @@ requirejs.config
     bootstrap:
       exports: 'Bootstrap'
 
-require ['backbone', 'path', 'routers/messages_router'], (Backbone) =>
+require ['backbone', 'path', 'routers/quotes_router'], (Backbone) =>
   Backbone.history.start pushState: true
   $(document).on 'click', 'a:not([data-bypass])', (evt) ->
     href = $(this).attr 'href'

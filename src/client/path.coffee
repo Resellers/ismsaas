@@ -1,4 +1,4 @@
 class window.Path
-  @new_message: => 'messages/new'
+  @new_quote: => 'quotes/new'
 
 

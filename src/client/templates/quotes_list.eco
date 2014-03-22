@@ -1,6 +1,6 @@
-<h1>Messages List
+<h1>Quotes List
   <small>
-    <a href="<%= Path.new_message() %>">
+    <a href="<%= Path.new_quote() %>">
       <span class="glyphicon glyphicon-file"></span>
     </a>
   </small>
