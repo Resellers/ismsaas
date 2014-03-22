@@ -22,7 +22,7 @@ app.use express.static path.join(__dirname, 'client')
 app.use express.errorHandler() if 'development' == app.get('env')
 
 app.get  '/api/v1/messages', messages_controller.index
-app.post '/api/v1/messages', messages_controller.create
+app.post '/api/v1/quotes',   messages_controller.create
 app.use (req, res) ->
   return res.send 404 unless req.method == 'GET'
   res.sendfile path.join(__dirname, '../public/index.html')

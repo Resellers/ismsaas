@@ -1,4 +1,4 @@
-define ['backbone', 'models/message'], (Backbone, Message) ->
+define ['backbone', 'models/quote'], (Backbone, Quote) ->
   class Messages extends Backbone.Collection
-    model: Message
+    model: Quote
     url: '/api/v1/messages'
