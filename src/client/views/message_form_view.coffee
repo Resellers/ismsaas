@@ -1,6 +1,6 @@
-define ['backbone', 'templates/message_form'], (Backbone) ->
+define ['backbone', 'templates/quote_form'], (Backbone) ->
   class MessageFormView extends Backbone.View
-    template: JST['message_form']
+    template: JST['quote_form']
 
     context: =>
       cid: @cid
