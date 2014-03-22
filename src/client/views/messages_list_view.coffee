@@ -1,10 +1,10 @@
 define [
   'backbone'
   'views/message_row_view'
-  'templates/messages_list'
+  'templates/quotes_list'
   ], (Backbone, MessageRowView) ->
   class MessagesListView extends Backbone.View
-    template: JST['messages_list']
+    template: JST['quotes_list']
 
     initialize: =>
       @views = []
