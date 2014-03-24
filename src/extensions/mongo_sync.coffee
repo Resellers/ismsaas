@@ -1,12 +1,26 @@
 {MongoClient} = require 'mongodb'
 _             = require 'underscore'
 
+
+METHODS =
+  'create': 'insert'
+  'read':   'find'
+#   'update': 'save'
+#   'patch':  'save'
+#   'delete': 'remove'
+
 module.exports = (method, model, options={}) ->
   unless _.result(model, 'url')?
     throw new Error 'A "url" property or function must be specified'
 
+  type = METHODS[method]
+
   MongoClient.connect global.database, (err, db) =>
-    db.collection('quotes').insert {}, options.success
+    if type == 'find'
+      func = db.collection('quotes')[type]().toArray
+    else
+      func = (cb=->) -> db.collection('quotes')[type](model.toJSON(), cb)
+    func (err, results) => options.success results
 # urlError = -> throw new Error 'A "url" property or function must be specified'
 
 # METHODS =
