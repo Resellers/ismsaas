@@ -1,13 +1,12 @@
 Backbone = require 'backbone'
-{MongoClient} = require 'mongodb'
+mongo_sync = require '../extensions/mongo_sync'
 
 class Quote extends Backbone.Model
-  save: (attributes={}, success:cb) =>
-    @set attributes
-    MongoClient.connect 'mongodb://127.0.0.1:27017/ismsaas', (err, db) =>
-      db.collection('quotes').insert @toJSON(), =>
-        @trigger 'sync'
-        db.close()
-        cb()
+  sync: mongo_sync
+  url: 'quotes'
+
+  # validate: (attributes={}, options={}) =>
+  #   unless attributes.ism_id? || @has('ism_id')
+  #     ism_id: ["cannot be blank"]
 
 module.exports = Quote

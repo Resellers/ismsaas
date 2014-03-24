@@ -2,6 +2,9 @@ express  = require 'express'
 http     = require 'http'
 path     = require 'path'
 
+# Config
+global.database = 'mongodb://127.0.0.1:27017/ismsaas'
+
 quotes_controller = require './controllers/quotes_controller'
 isms_controller   = require './controllers/isms_controller'
 
