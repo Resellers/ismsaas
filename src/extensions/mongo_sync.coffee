@@ -20,6 +20,7 @@ module.exports = (method, model, options={}) ->
       func = db.collection('quotes')[type]().toArray
     else
       func = (cb=->) -> db.collection('quotes')[type](model.toJSON(), cb)
+
     func (err, results) => options.success results
 # urlError = -> throw new Error 'A "url" property or function must be specified'
 

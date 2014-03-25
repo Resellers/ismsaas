@@ -1,5 +1,6 @@
 mongo_sync = require '../src/extensions/mongo_sync'
 _          = require 'underscore'
+async      = require 'async'
 Backbone   = require 'backbone'
 {MongoClient} = require 'mongodb'
 
@@ -9,7 +10,7 @@ describe 'mongo_sync', ->
       done err
 
   beforeEach (done) ->
-    @db.dropDatabase done
+    scrub_the_database @db, done
 
   after ->
     @db?.close()
@@ -39,14 +40,22 @@ describe 'mongo_sync', ->
           expect(result.spoo).to.equal 'asdf'
           done()
 
-
   describe 'read', ->
-    it 'should call its callback with empty results', (done) ->
-      model = new Backbone.Model
-      model.url = 'quotes'
-      @db.collection('quotes').insert foo: 'bar', =>
+    describe 'with no records in the database', ->
+      it 'should call its callback with empty results', (done) ->
+        model = new Backbone.Model
+        model.url = 'empty_collection'
         mongo_sync 'read', model, success: (response) =>
-          expect(_.last(response).foo).to.equal 'bar'
+          expect(_.size response).to.equal 0
           done()
+
+    describe 'with a single record in the database', ->
+      it 'should call its callback with empty results', (done) ->
+        @db.collection('quotes').insert foo: 'bar', =>
+          model = new Backbone.Model
+          model.url = 'quotes'
+          mongo_sync 'read', model, success: (response) =>
+            expect(_.last(response).foo).to.equal 'bar'
+            done()
 
 
