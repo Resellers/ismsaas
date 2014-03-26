@@ -1,4 +1,4 @@
-Backbone = require 'backbone'
+Backbone   = require 'backbone'
 mongo_sync = require '../extensions/mongo_sync'
 
 class Quote extends Backbone.Model

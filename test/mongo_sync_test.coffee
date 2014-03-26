@@ -40,6 +40,18 @@ describe 'mongo_sync', ->
           expect(result.spoo).to.equal 'asdf'
           done()
 
+    describe 'inserting a valid record with optional attrs', ->
+      beforeEach (done) ->
+        model = new Backbone.Model bar: 'foo'
+        model.url = 'isms'
+        mongo_sync 'create', model, attrs: {bar: 'baz'}, success: =>
+          done()
+
+      it 'should override the model data with the attr data', (done) ->
+        @db.collection('isms').findOne (err, result) =>
+          expect(result.bar).to.equal 'baz'
+          done()
+
   describe 'read', ->
     describe 'with no records in the database', ->
       it 'should call its callback with empty results', (done) ->

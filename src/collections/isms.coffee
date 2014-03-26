@@ -1,13 +1,9 @@
-{MongoClient} = require 'mongodb'
-Backbone = require 'backbone'
+Backbone   = require 'backbone'
+mongo_sync = require '../extensions/mongo_sync'
 
 class Isms extends Backbone.Collection
-  fetch: (cb=->) =>
-    MongoClient.connect 'mongodb://127.0.0.1:27017/ismsaas', (err, db) =>
-      db.collection('isms').find().toArray (err, results) =>
-        @set results
-        db.close()
-        cb()
+  sync: mongo_sync
+  url:  'isms'
 
 module.exports = Isms
 

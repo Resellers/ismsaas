@@ -4,7 +4,7 @@ Quotes = require '../collections/quotes'
 class QuotesController
   @index: (request, response) ->
     quotes = new Quotes
-    quotes.fetch =>
+    quotes.fetch success: =>
       response.send quotes.toJSON()
 
   @create: (request, response) ->

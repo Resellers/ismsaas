@@ -1,13 +1,17 @@
-Backbone = require 'backbone'
-{MongoClient} = require 'mongodb'
+Backbone   = require 'backbone'
+_          = require 'underscore'
+mongo_sync = require '../extensions/mongo_sync'
+Quotes     = require '../collections/quotes'
 
 class Ism extends Backbone.Model
-  save: (attributes={}, success:cb) =>
-    @set attributes
-    MongoClient.connect 'mongodb://127.0.0.1:27017/ismsaas', (err, db) =>
-      db.collection('isms').insert @toJSON(), =>
-        @trigger 'sync'
-        db.close()
-        cb()
+  sync: mongo_sync
+  url:  'isms'
+
+  initialize: =>
+    @quotes = new Quotes
+
+  toJSON: =>
+    _.defaults super,
+      quotes: @quotes.toJSON()
 
 module.exports = Ism
