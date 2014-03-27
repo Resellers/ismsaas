@@ -15,12 +15,17 @@ module.exports = (method, model, options={}) ->
   unless url?
     throw new Error 'A "url" property or function must be specified'
 
+  single_record = /\//.test url
+  url = _.first url.split('/')
+
   type = METHODS[method]
   data = options.attrs ? model.toJSON()
 
   MongoClient.connect global.database, (err, db) =>
-    if type == 'find'
-      func = db.collection(url)[type]().toArray
+    if single_record
+      func = (cb=->) -> db.collection(url).findOne data, cb
+    else if type == 'find'
+      func = (cb=->) -> db.collection(url)[type]().toArray cb
     else
       func = (cb=->) -> db.collection(url)[type](data, cb)
 

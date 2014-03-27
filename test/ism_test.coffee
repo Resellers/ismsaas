@@ -2,7 +2,7 @@
 Ism           = require '../src/models/ism'
 _             = require 'underscore'
 
-describe 'ism', ->
+xdescribe 'ism', ->
   before (done) ->
     MongoClient.connect global.database, (err, @db) =>
       done err
@@ -19,16 +19,22 @@ describe 'ism', ->
       expect(model.quotes.isEmpty()).to.be.true
 
     describe 'when a quote is added and the ism is saved', ->
+      beforeEach (done) ->
+        @model = new Ism
+        @model.quotes.add text: 'This is mah text'
+        @model.save {}, success: => done()
+
       it 'should save the quote as well', (done) ->
-        model = new Ism
-        model.quotes.add text: 'This is mah text'
-        model.save {}, success: =>
-          @db.collection('isms').findOne (err, record) =>
-            expect(_.size record.quotes).to.equal 1
+        @db.collection('isms').findOne (err, record) =>
+          expect(_.size record.quotes).to.equal 1
+          done()
+
+      describe 'when the ism is then fetched', ->
+        it 'should include the quote', (done) ->
+          model = new Ism id: @model.id
+          model.fetch success: =>
+            console.log model.toJSON()
+            expect(model.quotes.first().get 'text').to.equal 'This is mah text'
             done()
-          # model = new Ism id: model.id
-          # model.fetch success: =>
-          #   expect(model.quotes.first().get 'text').to.equal 'This is mah text'
-          #   done()
 
 

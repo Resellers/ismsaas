@@ -2,6 +2,7 @@ mongo_sync = require '../src/extensions/mongo_sync'
 _          = require 'underscore'
 async      = require 'async'
 Backbone   = require 'backbone'
+MongoModel = require '../src/models/mongo_model'
 {MongoClient} = require 'mongodb'
 
 describe 'mongo_sync', ->
@@ -53,21 +54,40 @@ describe 'mongo_sync', ->
           done()
 
   describe 'read', ->
-    describe 'with no records in the database', ->
-      it 'should call its callback with empty results', (done) ->
-        model = new Backbone.Model
-        model.url = 'empty_collection'
-        mongo_sync 'read', model, success: (response) =>
-          expect(_.size response).to.equal 0
-          done()
-
-    describe 'with a single record in the database', ->
-      it 'should call its callback with empty results', (done) ->
-        @db.collection('quotes').insert foo: 'bar', =>
-          model = new Backbone.Model
-          model.url = 'quotes'
-          mongo_sync 'read', model, success: (response) =>
-            expect(_.last(response).foo).to.equal 'bar'
+    describe 'when reading from a collection', ->
+      describe 'with no records in the database', ->
+        it 'should call its callback with empty results', (done) ->
+          collection = new Backbone.Collection
+          collection.url = 'empty_collection'
+          mongo_sync 'read', collection, success: (response) =>
+            expect(_.size response).to.equal 0
             done()
 
+      describe 'with a single record in the database', ->
+        it 'should call its callback with empty results', (done) ->
+          @db.collection('quotes').insert foo: 'bar', =>
+            collection = new Backbone.Collection
+            collection.url = 'quotes'
+            mongo_sync 'read', collection, success: (response) =>
+              expect(_.last(response).foo).to.equal 'bar'
+              done()
 
+    describe 'when reading from a model', ->
+      describe 'with no records in the database', ->
+        it 'should call its callback with a null', (done) ->
+          model = new MongoModel _id: 2
+          model.urlRoot = 'empty_collection'
+          mongo_sync 'read', model, success: (response) =>
+            expect(response).to.be.null
+            done()
+
+      describe 'with a single record in the database', ->
+        it 'should call its callback with ', (done) ->
+          @db.collection('quotes').insert foo: 'bar', =>
+            @db.collection('quotes').findOne (err, result) =>
+              model = new MongoModel _id: result._id
+              model.urlRoot = 'quotes'
+              mongo_sync 'read', model, success: (response) =>
+                expect(response).to.be.a 'object'
+                expect(response.foo).to.equal 'bar'
+                done()
