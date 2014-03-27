@@ -3,7 +3,8 @@ define [
   'collections/isms'
   'views/isms_list_view'
   'views/ism_form_view'
-  ], (Ism, Isms, IsmsListView, IsmFormView) ->
+  'views/ism_view'
+  ], (Ism, Isms, IsmsListView, IsmFormView, IsmView) ->
 
   class IsmsRouter extends Backbone.Router
     initialize: =>
@@ -14,6 +15,7 @@ define [
     routes:
       ''         : 'index'
       'isms/new' : 'new'
+      'isms/:id' : 'show'
 
     index: =>
       collection = new Isms
@@ -25,5 +27,12 @@ define [
       model = new Ism
       view  = new IsmFormView model: model
       $('#main-content').html view.render()
+
+    show: (id) =>
+      model = new Ism _id: id
+      model.fetch()
+      view = new IsmView model: model
+      $('#main-content').html view.render()
+
 
   new IsmsRouter
