@@ -15,7 +15,7 @@ class Ism extends MongoModel
     _.defaults super,
       quotes: @quotes.toJSON()
 
-  parse: (results, err) =>
+  parse: (result, err) =>
     console.log result
     super
 

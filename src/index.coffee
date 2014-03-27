@@ -27,8 +27,9 @@ app.use express.errorHandler() if 'development' == app.get('env')
 
 app.get  '/api/v1/quotes', quotes_controller.index
 app.post '/api/v1/quotes', quotes_controller.create
-app.get  '/api/v1/isms',   isms_controller.index
-app.post '/api/v1/isms',   isms_controller.create
+app.get  '/api/v1/isms',     isms_controller.index
+app.get  '/api/v1/isms/:id', isms_controller.show
+app.post '/api/v1/isms',     isms_controller.create
 
 app.use (req, res) ->
   return res.send 404 unless req.method == 'GET'
