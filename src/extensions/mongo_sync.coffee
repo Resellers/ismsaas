@@ -1,5 +1,5 @@
-{MongoClient} = require 'mongodb'
-_             = require 'underscore'
+{MongoClient,ObjectID} = require 'mongodb'
+_                      = require 'underscore'
 
 
 METHODS =
@@ -16,18 +16,22 @@ module.exports = (method, model, options={}) ->
     throw new Error 'A "url" property or function must be specified'
 
   single_record = /\//.test url
-  url = _.first url.split('/')
+  [url,id] = url.split('/')
 
   type = METHODS[method]
   data = options.attrs ? model.toJSON()
 
   MongoClient.connect global.database, (err, db) =>
+    collection = db.collection(url)
+
     if single_record
-      func = (cb=->) -> db.collection(url).findOne data, cb
-    else if type == 'find'
-      func = (cb=->) -> db.collection(url)[type]().toArray cb
+      type = 'findOne'
+      data = _id: new ObjectID id
+
+    if type == 'find'
+      func = (cb=->) -> collection[type]().toArray cb
     else
-      func = (cb=->) -> db.collection(url)[type](data, cb)
+      func = (cb=->) -> collection[type](data, cb)
 
     func (error, results) =>
       return options.error error if error?

@@ -75,14 +75,14 @@ describe 'mongo_sync', ->
     describe 'when reading from a model', ->
       describe 'with no records in the database', ->
         it 'should call its callback with a null', (done) ->
-          model = new MongoModel _id: 2
+          model = new MongoModel _id: '000000000000000000000000'
           model.urlRoot = 'empty_collection'
           mongo_sync 'read', model, success: (response) =>
             expect(response).to.be.null
             done()
 
       describe 'with a single record in the database', ->
-        it 'should call its callback with ', (done) ->
+        it 'should call its callback with model data', (done) ->
           @db.collection('quotes').insert foo: 'bar', =>
             @db.collection('quotes').findOne (err, result) =>
               model = new MongoModel _id: result._id
@@ -91,3 +91,4 @@ describe 'mongo_sync', ->
                 expect(response).to.be.a 'object'
                 expect(response.foo).to.equal 'bar'
                 done()
+

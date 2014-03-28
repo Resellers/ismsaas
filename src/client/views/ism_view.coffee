@@ -2,6 +2,9 @@ define ['backbone', 'templates/ism'], (Backbone) ->
   class IsmView extends Backbone.View
     template: JST['ism']
 
+    initialize: =>
+      @listenTo @model, 'change', @render
+
     context: =>
       model: @model.toJSON()
 

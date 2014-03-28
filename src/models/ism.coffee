@@ -15,8 +15,4 @@ class Ism extends MongoModel
     _.defaults super,
       quotes: @quotes.toJSON()
 
-  parse: (result, err) =>
-    console.log result
-    super
-
 module.exports = Ism
