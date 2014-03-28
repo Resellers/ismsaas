@@ -72,6 +72,16 @@ describe 'mongo_sync', ->
               expect(_.last(response).foo).to.equal 'bar'
               done()
 
+        it 'should only return data from the whitelist', (done) ->
+          @db.collection('quotes').insert foo: 'bar', faz: 'baz', =>
+            @db.collection('quotes').findOne (err, result) =>
+              collection = new Backbone.Collection
+              collection.url = 'quotes'
+              mongo_sync 'read', collection, fields: {foo: 1}, success: (response) =>
+                expect(_.last(response).foo).to.equal 'bar'
+                expect(_.last(response).faz).to.be.undefined
+                done()
+
     describe 'when reading from a model', ->
       describe 'with no records in the database', ->
         it 'should call its callback with a null', (done) ->

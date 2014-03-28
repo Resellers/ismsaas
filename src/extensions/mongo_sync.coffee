@@ -29,7 +29,7 @@ module.exports = (method, model, options={}) ->
       data = _id: new ObjectID id
 
     if type == 'find'
-      func = (cb=->) -> collection[type]().toArray cb
+      func = (cb=->) -> collection[type]({}, options).toArray cb
     else
       func = (cb=->) -> collection[type](data, cb)
 
