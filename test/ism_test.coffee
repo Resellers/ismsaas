@@ -2,7 +2,7 @@
 Ism           = require '../src/models/ism'
 _             = require 'underscore'
 
-xdescribe 'ism', ->
+describe 'ism', ->
   before (done) ->
     MongoClient.connect global.database, (err, @db) =>
       done err
@@ -31,10 +31,10 @@ xdescribe 'ism', ->
 
       describe 'when the ism is then fetched', ->
         it 'should include the quote', (done) ->
-          model = new Ism id: @model.id
-          model.fetch success: =>
-            console.log model.toJSON()
-            expect(model.quotes.first().get 'text').to.equal 'This is mah text'
-            done()
+          @db.collection('isms').findOne (err, record) =>
+            model = new Ism _id: record._id
+            model.fetch success: =>
+              expect(model.quotes.first().get 'text').to.equal 'This is mah text'
+              done()
 
 

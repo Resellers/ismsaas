@@ -4,8 +4,7 @@ Isms = require '../collections/isms'
 class IsmsController
   @index: (request, response) ->
     isms = new Isms
-    isms.fetch success: =>
-      console.log 'came back'
+    isms.fetch fields: {quotes: 0}, success: =>
       response.send isms.toJSON()
 
   @create: (request, response) ->

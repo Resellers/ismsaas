@@ -1,9 +1,9 @@
-<h1>Quotes List
+<h3>Quotes List
   <small>
-    <a href="<%= Path.new_quote() %>">
+    <a href="<%= Path.new_ism_quote @ism_id %>">
       <span class="glyphicon glyphicon-file"></span>
     </a>
   </small>
-</h1>
+</h3>
 
 <div class="list-group"></div>

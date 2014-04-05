@@ -12,7 +12,7 @@ define [
       @listenTo @collection, 'sync error request reset', @render
 
     render: =>
-      @$el.html @template()
+      @$el.html @template ism_id: @collection.ism_id
       @remove_views()
       @collection.each @add_one
       @$el
