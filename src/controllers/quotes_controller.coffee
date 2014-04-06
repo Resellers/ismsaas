@@ -1,15 +1,14 @@
+_      = require 'underscore'
+Ism    = require '../models/ism'
 Quote  = require '../models/quote'
-Quotes = require '../collections/quotes'
 
 class QuotesController
-  @index: (request, response) ->
-    quotes = new Quotes
-    quotes.fetch success: =>
-      response.send quotes.toJSON()
-
   @create: (request, response) ->
-    quote = new Quote request.body
-    quote.save {}, success: ->
-      response.send quote.toJSON(), 201
+    ism = new Ism _id: request.params.ism_id
+    ism.fetch success: =>
+      quote = new Quote _.pick(request.body, 'text')
+      ism.quotes.add quote
+      ism.save {}, success: =>
+        response.send quote.toJSON(), 201
 
 module.exports = QuotesController

@@ -12,17 +12,10 @@ define [
         $('.navbar-nav li.nav-quotes').addClass 'active'
 
     routes:
-      'quotes'     : 'index'
-      'quotes/new' : 'new'
+      'isms/:ism_id/quotes/new' : 'new'
 
-    index: =>
-      collection = new Quotes
-      collection.fetch()
-      view = new QuotesListView collection: collection
-      $('#main-content').html view.render()
-
-    new: =>
-      model = new Quote
+    new: (ism_id) =>
+      model = new Quote ism_id: ism_id
       view  = new QuoteFormView model: model
       $('#main-content').html view.render()
 

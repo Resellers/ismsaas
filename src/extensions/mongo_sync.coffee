@@ -5,7 +5,7 @@ _                      = require 'underscore'
 METHODS =
   'create': 'insert'
   'read':   'find'
-#   'update': 'save'
+  'update': 'save'
 #   'patch':  'save'
 #   'delete': 'remove'
 
@@ -24,7 +24,9 @@ module.exports = (method, model, options={}) ->
   MongoClient.connect global.database, (err, db) =>
     collection = db.collection(url)
 
-    if single_record
+    if type == 'save'
+      data._id = new ObjectID id
+    else if single_record
       type = 'findOne'
       data = _id: new ObjectID id
 

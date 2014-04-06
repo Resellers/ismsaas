@@ -12,7 +12,7 @@ class Ism extends MongoModel
       @quotes.set @get 'quotes'
 
   toJSON: =>
-    _.defaults super,
+    _.extend super,
       quotes: @quotes.toJSON()
 
 module.exports = Ism

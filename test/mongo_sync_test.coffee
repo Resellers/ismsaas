@@ -53,6 +53,26 @@ describe 'mongo_sync', ->
           expect(result.bar).to.equal 'baz'
           done()
 
+  describe 'update', ->
+    describe 'with a record in the database', ->
+      beforeEach (done) ->
+        @db.collection('quotes').insert foo: 'bar', =>
+          @db.collection('quotes').findOne foo: 'bar', (err, result) =>
+            @model = new MongoModel result
+            @model.urlRoot = 'quotes'
+            done()
+
+      describe 'when the record is changed and saved', ->
+        beforeEach (done) ->
+          @model.set foo: 'spoo'
+          mongo_sync 'update', @model, success: (response) =>
+            done()
+
+        it 'should update the record', (done) ->
+          @db.collection('quotes').findOne _id: @model.id, (err, result) =>
+            expect(result.foo).to.equal 'spoo'
+            done()
+
   describe 'read', ->
     describe 'when reading from a collection', ->
       describe 'with no records in the database', ->

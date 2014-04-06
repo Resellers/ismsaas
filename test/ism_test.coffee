@@ -20,7 +20,7 @@ describe 'ism', ->
 
     describe 'when a quote is added and the ism is saved', ->
       beforeEach (done) ->
-        @model = new Ism
+        @model = new Ism quotes: []
         @model.quotes.add text: 'This is mah text'
         @model.save {}, success: => done()
 
@@ -30,11 +30,19 @@ describe 'ism', ->
           done()
 
       describe 'when the ism is then fetched', ->
-        it 'should include the quote', (done) ->
+        beforeEach (done) ->
           @db.collection('isms').findOne (err, record) =>
             model = new Ism _id: record._id
             model.fetch success: =>
-              expect(model.quotes.first().get 'text').to.equal 'This is mah text'
+              @sut = model
               done()
+
+        it 'should include the quote', ->
+          expect(@sut.quotes.first().get 'text').to.equal 'This is mah text'
+
+        describe 'when a second quote is added', ->
+          beforeEach ->
+            # @sut.quotes.add 'quo'
+
 
 
