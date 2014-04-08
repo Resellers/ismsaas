@@ -3,7 +3,7 @@ define ['backbone', 'templates/quote_form'], (Backbone) ->
     template: JST['quote_form']
 
     initialize: =>
-      @listenTo @model, 'sync', => Backbone.history.navigate Path.quotes(), true
+      @listenTo @model, 'sync', => Backbone.history.navigate Path.ism(@model.get 'ism_id'), true
 
     context: =>
       cid: @cid
