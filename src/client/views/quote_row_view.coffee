@@ -14,5 +14,6 @@ define ['backbone', 'templates/quote_row'], (Backbone) ->
 
     delete: ($event) =>
       $event.preventDefault()
+      $event.stopPropagation()
       @model.destroy()
 
