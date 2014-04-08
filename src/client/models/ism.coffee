@@ -8,5 +8,3 @@ define ['backbone', 'collections/quotes'], (Backbone, Quotes) ->
       @quotes.ism_id = @id
       @on 'change:quotes', =>
         @quotes.set @get 'quotes'
-
-

@@ -1,8 +1,11 @@
 Backbone   = require 'backbone'
-mongo_sync = require '../extensions/mongo_sync'
+_          = require 'underscore'
+MongoModel = require './mongo_model'
+uuid       = require 'node-uuid'
 
-class Quote extends Backbone.Model
-  sync: mongo_sync
+class Quote extends MongoModel
+  initialize: =>
+    @set _id: uuid.v1()
 
   # validate: (attributes={}, options={}) =>
   #   unless attributes.ism_id? || @has('ism_id')

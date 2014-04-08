@@ -9,3 +9,9 @@ define ['backbone', 'templates/quote_row'], (Backbone) ->
     render: =>
       @$el.html @template @context()
 
+    events:
+      'click .delete-quote': 'delete'
+
+    delete: =>
+      @model.destroy()
+

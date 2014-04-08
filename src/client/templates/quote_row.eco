@@ -1,1 +1,5 @@
+<a href="#" class="delete-quote">
+  <span class="glyphicon glyphicon-remove"></span>
+</a>
+
 <%= @model.text %>

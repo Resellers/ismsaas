@@ -15,6 +15,6 @@ class IsmsController
   @show: (request, response) ->
     ism = new Ism _id: request.params.id
     ism.fetch success: ->
-      response.send ism.toJSON(), 201
+      response.send ism.toJSON()
 
 module.exports = IsmsController
