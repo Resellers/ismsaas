@@ -12,6 +12,7 @@ define ['backbone', 'templates/quote_row'], (Backbone) ->
     events:
       'click .delete-quote': 'delete'
 
-    delete: =>
+    delete: ($event) =>
+      $event.preventDefault()
       @model.destroy()
 

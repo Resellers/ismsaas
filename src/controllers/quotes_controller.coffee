@@ -11,4 +11,11 @@ class QuotesController
       ism.save {}, success: =>
         response.send quote.toJSON(), 201
 
+  @destroy: (request, response) ->
+    ism = new Ism _id: request.params.ism_id
+    ism.fetch success: =>
+      quote = ism.quotes.findWhere _id: request.params.quote_id
+      quote.destroy success: =>
+        response.send null, 204
+
 module.exports = QuotesController

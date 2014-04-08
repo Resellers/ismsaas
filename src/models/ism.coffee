@@ -10,6 +10,7 @@ class Ism extends MongoModel
     @quotes = new Quotes @get 'quotes'
     @on 'change:quotes', =>
       @quotes.set @get 'quotes'
+    @listenTo @quotes, 'add', (model) => model.set ism_id: @id
 
   toJSON: =>
     _.extend super,
