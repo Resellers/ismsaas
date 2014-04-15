@@ -9,8 +9,6 @@ define ['backbone', 'views/quotes_list_view', 'templates/ism'], (Backbone, Quote
       model: @model.toJSON()
 
     render: =>
-      throw 'Whoops' unless @model.quotes?
-      @$el.attr 'href', Path.ism @model.id
       @quotes_list_view = new QuotesListView collection: @model.quotes
       @$el.html @template @context()
       @$el.append @quotes_list_view.render()

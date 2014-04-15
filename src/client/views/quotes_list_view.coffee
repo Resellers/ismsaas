@@ -10,9 +10,6 @@ define [
       @views = []
       @listenTo @collection, 'add', @add_one
       @listenTo @collection, 'sync error request reset destroy', @render
-      @listenTo @collection, 'all', =>
-        console.log arguments
-
 
     render: =>
       @$el.html @template ism_id: @collection.ism_id

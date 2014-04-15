@@ -1,0 +1,28 @@
+html {
+  height: 100%;
+}
+
+body {
+  background: no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}
+
+.ism {
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+}
+
+.ism h1 {
+  margin: 0;
+  font-family: 'Wire One', sans-serif;
+  font-size: 72px;
+  color: white;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 45%;
+}

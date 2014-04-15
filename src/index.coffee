@@ -31,6 +31,9 @@ app.post   '/api/v1/isms',     isms_controller.create
 app.post   '/api/v1/isms/:ism_id/quotes', quotes_controller.create
 app.delete '/api/v1/isms/:ism_id/quotes/:quote_id', quotes_controller.destroy
 
+app.get    '/preview/:id', (req, res) =>
+  res.sendfile path.join(__dirname, '../public/preview.html')
+
 app.use (req, res) ->
   return res.send 404 unless req.method == 'GET'
   res.sendfile path.join(__dirname, '../public/index.html')

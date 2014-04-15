@@ -6,4 +6,6 @@ class window.Path
 
   @new_ism_quote: (ism_id) => "/isms/#{ism_id}/quotes/new"
 
+  @preview: (ism_id) => "/preview/#{ism_id}"
+
 

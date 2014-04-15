@@ -13,9 +13,9 @@ define [
         $('.navbar-nav li.nav-isms').addClass 'active'
 
     routes:
-      ''         : 'index'
-      'isms/new' : 'new'
-      'isms/:id' : 'show'
+      ''                 : 'index'
+      'isms/new'         : 'new'
+      'isms/:id'         : 'show'
 
     index: =>
       collection = new Isms
@@ -33,6 +33,5 @@ define [
       model.fetch()
       view = new IsmView model: model
       $('#main-content').html view.render()
-
 
   new IsmsRouter
