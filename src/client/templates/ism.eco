@@ -1,3 +1,10 @@
-<h1><%= @model.name %></h1>
+<h1>
+  <%= @model.name %>
+  <small>
+    <a href="<%= Path.edit_ism @model._id %>">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </a>
+  </small>
+</h1>
 
 <a href="<%= Path.preview @model._id %>" data-bypass="true">Preview</a>

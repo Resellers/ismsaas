@@ -9,6 +9,5 @@ define ['backbone', 'views/random_quote_view','templates/preview'], (Backbone,Ra
     render: =>
       @random_quote_view = new RandomQuoteView collection: @model.quotes
       @$el.html @template()
-      $('body').css 'background-image': "url('http://www.juddisms.com/img/judd.jpg')"
+      $('body').css 'background-image': "url('#{@model.get 'image_url'}')"
       @$el.append @random_quote_view.render()
-

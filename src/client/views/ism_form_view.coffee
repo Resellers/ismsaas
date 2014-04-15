@@ -3,10 +3,11 @@ define ['backbone', 'templates/ism_form'], (Backbone) ->
     template: JST['ism_form']
 
     initialize: =>
-      @listenTo @model, 'sync', => Backbone.history.navigate Path.isms(), true
+      @listenTo @model, 'change', @render
 
     context: =>
       cid: @cid
+      model: @model.toJSON()
 
     render: =>
       @$el.html @template @context()
@@ -17,8 +18,10 @@ define ['backbone', 'templates/ism_form'], (Backbone) ->
 
     submit: ($event) =>
       $event.preventDefault()
+      @listenToOnce @model, 'sync', => Backbone.history.navigate Path.isms(), true
       @model.save()
 
     update_model: =>
       @model.set
-        name: @$('input.name').val()
+        name:      @$('input.name').val()
+        image_url: @$('input.image-url').val()

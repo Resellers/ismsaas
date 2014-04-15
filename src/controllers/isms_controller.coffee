@@ -12,6 +12,11 @@ class IsmsController
     ism.save {}, success: ->
       response.send ism.toJSON(), 201
 
+  @update: (request, response) ->
+    ism = new Ism _id: request.params.id
+    ism.save request.body, success: ->
+      response.send null, 204
+
   @show: (request, response) ->
     ism = new Ism _id: request.params.id
     ism.fetch success: ->

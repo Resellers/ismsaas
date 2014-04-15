@@ -27,6 +27,7 @@ app.use express.errorHandler() if 'development' == app.get('env')
 
 app.get    '/api/v1/isms',     isms_controller.index
 app.get    '/api/v1/isms/:id', isms_controller.show
+app.put    '/api/v1/isms/:id', isms_controller.update
 app.post   '/api/v1/isms',     isms_controller.create
 app.post   '/api/v1/isms/:ism_id/quotes', quotes_controller.create
 app.delete '/api/v1/isms/:ism_id/quotes/:quote_id', quotes_controller.destroy

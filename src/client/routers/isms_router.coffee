@@ -15,6 +15,7 @@ define [
     routes:
       ''                 : 'index'
       'isms/new'         : 'new'
+      'isms/:id/edit'    : 'edit'
       'isms/:id'         : 'show'
 
     index: =>
@@ -25,6 +26,12 @@ define [
 
     new: =>
       model = new Ism
+      view  = new IsmFormView model: model
+      $('#main-content').html view.render()
+
+    edit: (id) =>
+      model = new Ism _id: id
+      model.fetch()
       view  = new IsmFormView model: model
       $('#main-content').html view.render()
 

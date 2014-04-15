@@ -9,8 +9,13 @@
 
     <form role="form">
       <div class="form-group">
-        <label for="inputName<%= @cid %>">Name</label>
-        <input type="text" class="form-control name" id="inputName<%= @cid %>">
+        <label for="input-name-<%= @cid %>">Name</label>
+        <input type="text" class="form-control name" id="input-name-<%= @cid %>" value="<%= @model.name %>">
+      </div>
+
+      <div class="form-group">
+        <label for="input-image-url-<%= @cid %>">Image Url</label>
+        <input type="text" class="form-control image-url" id="input-image-url-<%= @cid %>" value="<%= @model.image_url %>">
       </div>
 
       <button class="btn btn-default">Submit</button>
